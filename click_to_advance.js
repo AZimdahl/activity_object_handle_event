@@ -26,9 +26,18 @@ function ClickToAdvance (frame_images, target_div, x, y) {
      * Once you have implemented the handleEvent method, you can uncomment the
      * line below to add this object as the click event listener for the image.
      */
+    this.handleEvent = function(){
+        this.frame++;
+        if (this.frame >= frame_images.length-1) {this.frame = frame_images.length-1}
+        this.img.src = this.images[this.frame];
+    }
      
-     // this.img.addEventListener("click", this);            // (see Note 1 below)
+    this.img.addEventListener("click", this);            // (see Note 1 below)
 }
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
 
 for (let i = 0; i < 5; i++) {
     const x = 150 * i;
@@ -42,4 +51,4 @@ for (let i = 0; i < 5; i++) {
 
 In our case, this object is the instance of our ClickToAdvance class, and as usual, we're representing it with `this`. 
 
-You could pass a callback function directly to addEventListener, but in this case, we are making use of a different addEventListener feature: if we pass it a normal object (like `this`), instead of a function, it will try to look on that object for a method called "handleEvent". If it finds that method name on the object, it will then execute that it as though you had passed it directly as the callback function argument. One benefit of this approach is that you don't need to bind the callback function to the instance or worry about the differences between arrow functions and standard functions. */
+You could pass a callback function directly to addEventListener, but in this case, we are making use of a different addEventListener feature: if we pass it a normal object (like `this`), instead of a function, it will try to look on that object for a method called "handleEvent". If it finds that method name on the object, it will then execute it as though you had passed it directly as the callback function argument. One benefit of this approach is that you don't need to bind the callback function to the instance or worry about the differences between arrow functions and standard functions. */
